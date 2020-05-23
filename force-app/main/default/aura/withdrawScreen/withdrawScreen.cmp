@@ -1,0 +1,29 @@
+<aura:component>
+    <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
+    
+    <center>
+    <div class="slds-m-around_xx-large">
+        <div class="slds-text-heading_large">{!v.lconfig.language.label_currency}</div>
+        <lightning:button label="BYN"
+                class="slds-m-top--medium"
+                variant="brand"
+                iconName="utility:money"
+                onclick="{!c.bynSelected}"/>
+        <lightning:button label="USD"
+                class="slds-m-top--medium"
+                variant="brand"
+                iconName="utility:money"
+                onclick="{!c.usdSelected}"/>
+        <lightning:button label="RUB"
+                class="slds-m-top--medium"
+                variant="brand"
+                iconName="utility:money"
+                onclick="{!c.rubSelected}"/>
+        <p><lightning:button class="slds-m-top--medium slds-button_outline-brand"
+                label="{!v.lconfig.language.label_cancel}"
+                iconName="utility:undo"
+                title="Close"
+                onclick="{! c.closeWithdraw }"/></p>
+    </div>
+    </center>
+</aura:component>	

@@ -1,0 +1,22 @@
+<aura:component>
+    <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
+    <div class="slds-m-around_xx-large">
+        <center>
+            <div class="slds-text-heading_large">{!v.lconfig.language.label_welcome_user}, <b>{!v.lconfig.UserName__c}</b>!</div>
+            <p><lightning:button label="{!v.lconfig.language.label_balance_check}"
+                                  class="slds-m-top--medium slds-button--large"
+                                  variant="brand"
+                                  iconName="utility:money"
+                                  onclick="{!c.openBalance}"/></p>
+            <p><lightning:button label="{!v.lconfig.language.label_withdraw}"
+                                  class="slds-m-top--medium"
+                                  variant="brand"
+                                  iconName="utility:arrowdown"
+                                  onclick="{!c.openWithdraw}"/></p>
+            <p><lightning:button  label="{!v.lconfig.language.label_exit}" 
+                                  iconName="utility:close"
+                                  class="slds-m-top--medium slds-button_outline-brand"
+                                  onclick="{!c.clickCreate}"/></p>
+        </center>
+        </div>
+</aura:component>	

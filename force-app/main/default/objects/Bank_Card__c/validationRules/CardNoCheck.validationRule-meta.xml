@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CardNoCheck</fullName>
+    <active>true</active>
+    <errorConditionFormula>LEN( TEXT( CardNo__c )) &lt; 16</errorConditionFormula>
+    <errorDisplayField>CardNo__c</errorDisplayField>
+    <errorMessage>Please enter a valid card number</errorMessage>
+</ValidationRule>

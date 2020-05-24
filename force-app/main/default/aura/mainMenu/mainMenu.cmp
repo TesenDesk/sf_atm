@@ -2,7 +2,7 @@
     <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
     <div class="slds-m-around_xx-large">
         <center>
-            <div class="slds-text-heading_large">{!v.lconfig.language.label_welcome_user}, <b>{!v.lconfig.UserName__c}</b>!</div>
+            <div class="slds-text-heading_large">{!v.lconfig.language.label_welcome_user}, <b><!--{!v.lconfig.UserName__c}--></b>!</div>
             <p><lightning:button label="{!v.lconfig.language.label_balance_check}"
                                   class="slds-m-top--medium slds-button--large"
                                   variant="brand"

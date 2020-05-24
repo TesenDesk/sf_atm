@@ -1,3 +1,3 @@
 <aura:application extends="force:slds">
-    <c:clientMainScreen/>
+    <c:initScreen/>
 </aura:application>	

@@ -1,45 +1,10 @@
 <aura:component controller="ATMController">
-    <aura:attribute name="langUS" type="Map" default="{
-        label_welcome: 'Welcome!',
-        label_welcome_user: 'Welcome back',
-        label_main_menu: 'Main menu',
-        label_balance_header: 'Balance',
-        label_balance: 'Your balance:',
-        label_withdraw: 'Withdraw',
-        label_changelanguage: 'Английский',
-        label_balance_check: 'Check balance',
-        label_exit: 'Exit',
-        label_back: 'Back',
-        label_cancel: 'Cancel',
-        label_currency: 'Choose currency',
-    }"/>
-    <aura:attribute name="langRU" type="Map" default="{
-        label_welcome: 'Добро пожаловать!',
-        label_welcome_user: 'Добро пожаловать',
-        label_main_menu: 'Главное меню',
-        label_balance_header: 'Состояние счета',
-        label_balance: 'Текущий баланс счета:',
-        label_withdraw: 'Снятие средств',
-        label_changelanguage: 'Russian',
-        label_balance_check: 'Проверить баланс',
-        label_exit: 'Вернуть карту',
-        label_back: 'Назад',
-        label_cancel: 'Отмена',
-        label_currency: 'Выберите вылюту',
-    }"/>
     
-    <aura:attribute name="bdata" type="Bank_Config__c"/>
-    <aura:attribute name="lconfig" type="Bank_LocalConfig__c" default="{
-        'sobjectType': 'Bank_LocalConfig__c',
-        'BankName__c': 'Мой клевый банк',
-        'currentPage__c': 'Main',
-        'UserName__c': 'undefined',
-        'currentBalance__c': '520,80',
-        'cardCurrency__c': 'RUB'
-    }"/>
+    <aura:attribute name="client" type="Bank_Card__c"/>
+    <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
     <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
 
-    <c:bankHeader lconfig="{!v.lconfig}" langRU="{!v.langRU}" langUS="{!v.langUS}"/>
+    
     
     <aura:if isTrue="{!v.lconfig.currentPage__c  == 'Main'}">
         <c:mainMenu lconfig="{!v.lconfig}"/>

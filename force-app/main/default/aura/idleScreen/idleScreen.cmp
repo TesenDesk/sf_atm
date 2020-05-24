@@ -1,0 +1,22 @@
+<aura:component>
+    <aura:attribute name="langUS" type="Map"/>
+    <aura:attribute name="langRU" type="Map"/>
+    <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
+    <!--<aura:handler name="init" action="{!c.doInit}" value="{!this}"/>-->
+
+    <c:bankHeader lconfig="{!v.lconfig}" langRU="{!v.langRU}" langUS="{!v.langUS}"/>
+    <aura:if isTrue="{!v.lconfig.card_inside__c}">
+       <c:enterPINScreen lconfig="{!v.lconfig}"/>
+    <aura:set attribute="else">
+    <div class="slds-m-around_xx-large">
+        <center>
+            <div class="slds-text-heading_large">Ilde screen</div>
+            <div class="slds-text-heading_large"><b>NODATA</b></div>
+        </center>
+    </div>
+</aura:set>
+</aura:if>
+<aura:if isTrue="{!v.lconfig.cardEmuOpened__c}">
+    <c:cardEmu lconfig="{!v.lconfig}"/>
+</aura:if>
+</aura:component>

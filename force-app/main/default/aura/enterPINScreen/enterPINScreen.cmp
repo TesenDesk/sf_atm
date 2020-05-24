@@ -1,0 +1,38 @@
+<aura:component controller="ATMController">
+    <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
+    <aura:attribute name="client" type="Bank_Card__c"/>
+    
+   
+
+    
+
+    <center>
+    <div class="slds-m-top_xx-large">
+        <div class="slds-text-heading_large">{!v.lconfig.language.label_enterPIN}</div>
+        <fieldset class="slds-box slds-theme--default slds-container--small">
+        <form class="slds-form--stacked">
+        <lightning:input aura:id="pin"
+                         type="password"
+                         name="pin"
+                         messageWhenPatternMismatch="{!v.lconfig.language.label_pinWrong}"
+                         maxlength="4"
+                         pattern=".{4,}"
+                         placeholder="PIN"
+                         value="{!v.lconfig.EnteredPIN__c}"
+                         required="true"/>
+        <lightning:button class="slds-m-top--medium slds-button_outline-brand"
+                label="OK"
+                iconName="utility:check"
+                title="OK"
+                onclick="{! c.checkPIN }"/>
+    </form>
+    </fieldset>
+        <p><lightning:button class="slds-m-top--medium slds-button_outline-brand"
+                label="{!v.lconfig.language.label_cancel}"
+                iconName="utility:undo"
+                title="Close"
+                onclick="{! c.returnCard }"/></p>
+    </div>
+    </center>
+
+</aura:component>	

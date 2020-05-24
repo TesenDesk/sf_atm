@@ -10,5 +10,13 @@
             config.language = lang_RU;
         }
         component.set("v.lconfig", config);
+    },
+    cardinit: function(component, event, helper) {
+        var config = component.get("v.lconfig");
+
+        if (config.cardEmuEnabled__c && !config.card_inside__c){
+            config.cardEmuOpened__c = true;
+            component.set("v.lconfig", config);
+        }
     }
 })

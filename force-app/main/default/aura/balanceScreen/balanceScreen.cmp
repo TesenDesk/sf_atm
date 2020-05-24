@@ -29,7 +29,7 @@
     <div class="slds-m-around_xx-large">
         <center>
             <div class="slds-text-heading_large">{!v.lconfig.language.label_balance}</div>
-            <div class="slds-text-heading_large"><b>{!v.lconfig.currentBalance__c}</b>{!' ' + v.lconfig.cardCurrency__c}.</div>
+            <div class="slds-text-heading_large"><!--<b>{!v.lconfig.currentBalance__c}</b>{!' ' + v.lconfig.cardCurrency__c}-->.</div>
         <lightning:button class="slds-m-top--medium slds-button_outline-brand" 
                                 label="{!v.lconfig.language.label_back}"
                                 iconName="utility:undo"

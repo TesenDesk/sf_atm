@@ -2,7 +2,7 @@
     <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
     
     <center>
-    <div class="slds-m-around_xx-large">
+    <div class="slds-m-top_xx-large">
         <div class="slds-text-heading_large">{!v.lconfig.language.label_currency}</div>
         <lightning:button label="BYN"
                 class="slds-m-top--medium"

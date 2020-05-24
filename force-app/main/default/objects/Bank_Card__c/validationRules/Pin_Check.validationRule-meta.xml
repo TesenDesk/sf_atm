@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pin_Check</fullName>
+    <active>true</active>
+    <errorConditionFormula>cardPIN__c &lt; 1000</errorConditionFormula>
+    <errorDisplayField>cardPIN__c</errorDisplayField>
+    <errorMessage>Please enter a PIN-code. It cannot start at zero</errorMessage>
+</ValidationRule>

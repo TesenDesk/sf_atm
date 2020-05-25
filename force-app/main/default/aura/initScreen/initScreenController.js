@@ -10,6 +10,9 @@
 
                 lconfig.language = component.get("v.langRU");
                 lconfig.BankName__c = bankconfig.BankName__c;
+                lconfig.RateUSD__c = bankconfig.USDRate__c;
+                lconfig.RateBYN__c = bankconfig.BYNRate__c;
+                lconfig.OtherBankPrc__c = bankconfig.OtherBankPrc__c;
                 lconfig.init_complited__c = true;
                 console.log("Initialize complited. Now I have some data: " + JSON.stringify(bankconfig));
                 component.set("v.lconfig", lconfig);

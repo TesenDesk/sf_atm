@@ -1,36 +1,28 @@
 <aura:component>
+    <aura:attribute name="client" type="Bank_Card__c"/>
     <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
-    <!--<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
-        <div class="slds-modal__container">
-            <header class="slds-modal__header">
-                <lightning:buttonIcon iconName="utility:close"
-                                      onclick="{! c.closeBalance }"
-                                      alternativeText="close"
-                                      variant="bare-inverse"
-                                      class="slds-modal__close"/>
-                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Состояние счета</h2>
-            </header>
-            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                <center>
-                    <div class="slds-text-heading_large">Баланс Вашего счета:</div>
-                    <div class="slds-text-heading_large"><b>520,80</b> RUB.</div>
-                </center>
-            </div>
-            <footer class="slds-modal__footer">
-                <lightning:button variant="neutral" 
-                                  label="Закрыть"
-                                  iconName="utility:undo"
-                                  title="Close"
-                                  onclick="{! c.closeBalance }"/>
-            </footer>
-        </div>
-    </section>
-    <div class="slds-backdrop slds-backdrop_open"></div>-->
     <div class="slds-m-around_xx-large">
         <center>
             <div class="slds-text-heading_large">{!v.lconfig.language.label_balance}</div>
-            <div class="slds-text-heading_large"><!--<b>{!v.lconfig.currentBalance__c}</b>{!' ' + v.lconfig.cardCurrency__c}-->.</div>
-        <lightning:button class="slds-m-top--medium slds-button_outline-brand" 
+            <div class="slds-text-heading_large"><b>
+                <lightning:formattedNumber value="{!v.lconfig.currentBalance__c}" minimumFractionDigits="2"/>
+                </b>{!' ' + v.client.Currency__c}.</div>
+            
+
+            <aura:if isTrue="{!v.client.cardCredit__c > 0}">
+                <div class="slds-text-heading_medium">{!v.lconfig.language.label_credit}</div>
+                <aura:if isTrue="{!v.client.Balance__c > 0}">
+                    <div class="slds-text-heading_medium"><b>
+                        <lightning:formattedNumber value="0" minimumFractionDigits="2"/></b>
+                        {!' ' + v.client.Currency__c}.</div>
+                    <aura:set attribute="else">
+                        <div class="slds-text-heading_medium"><b>
+                            <lightning:formattedNumber value="{!v.client.Balance__c}" minimumFractionDigits="2"/>
+                            </b>{!' ' + v.client.Currency__c}.</div>
+                    </aura:set>
+                </aura:if>
+            </aura:if>
+            <lightning:button class="slds-m-top--medium slds-button_outline-brand" 
                                 label="{!v.lconfig.language.label_back}"
                                 iconName="utility:undo"
                                 title="Close"

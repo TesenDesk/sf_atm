@@ -14,6 +14,7 @@
             var comp = component.get("v.lconfig");
             comp.card_inside__c = true;
             comp.cardEmuOpened__c = false;
+            comp.waiting__c = true;
             component.set("v.lconfig", comp);
         }
      },

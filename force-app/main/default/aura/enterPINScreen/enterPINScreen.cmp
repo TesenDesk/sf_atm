@@ -1,11 +1,16 @@
 <aura:component controller="ATMController">
     <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
-    <aura:attribute name="client" type="Bank_Card__c"/>
+    <aura:attribute name="client" type="Bank_Card__c" default="{
+        'sobjectType': 'Bank_Card__c',
+        'cardPIN__c': 0,
+    }"/>
     
-   
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
 
     
-
+    <aura:if isTrue="{!v.lconfig.sessionValidated__c}">
+        <c:clientMainScreen lconfig="{!v.lconfig}" client="{!v.client}"/>
+        <aura:set attribute="else">
     <center>
     <div class="slds-m-top_xx-large">
         <div class="slds-text-heading_large">{!v.lconfig.language.label_enterPIN}</div>
@@ -34,5 +39,54 @@
                 onclick="{! c.returnCard }"/></p>
     </div>
     </center>
+    <aura:if isTrue="{!v.lconfig.waiting__c}">
+        <c:pleaseWait lconfig="{!v.lconfig}"/>
+    </aura:if>
+    <aura:if isTrue="{!v.lconfig.IncorrectPIN__c}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.lconfig.language.label_wrong_pin_header}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <center>
+                        <div class="slds-text-heading_large">{!v.lconfig.language.label_wrong_pin}</div>
+                    </center>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" 
+                                      label="{!v.lconfig.language.label_back}"
+                                      iconName="utility:undo"
+                                      title="Close"
+                                      onclick="{! c.closeErrPin }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <aura:if isTrue="{!v.lconfig.Unknown_Card__c}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.lconfig.language.label_wrong_card_header}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <center>
+                        <div class="slds-text-heading_large">{!v.lconfig.language.label_wrong_card}</div>
+                    </center>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" 
+                                      label="{!v.lconfig.language.label_exit}"
+                                      iconName="utility:close"
+                                      title="Close"
+                                      onclick="{! c.returnCard }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    </aura:set>
+    </aura:if>
 
 </aura:component>	

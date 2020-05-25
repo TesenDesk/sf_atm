@@ -1,8 +1,9 @@
 <aura:component>
+    <aura:attribute name="client" type="Bank_Card__c"/>
     <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
     <div class="slds-m-around_xx-large">
         <center>
-            <div class="slds-text-heading_large">{!v.lconfig.language.label_welcome_user}, <b><!--{!v.lconfig.UserName__c}--></b>!</div>
+            <div class="slds-text-heading_large">{!v.lconfig.language.label_welcome_user}, <b>{!v.client.Card_Owner_Name__c}</b>!</div>
             <p><lightning:button label="{!v.lconfig.language.label_balance_check}"
                                   class="slds-m-top--medium slds-button--large"
                                   variant="brand"
@@ -16,7 +17,7 @@
             <p><lightning:button  label="{!v.lconfig.language.label_exit}" 
                                   iconName="utility:close"
                                   class="slds-m-top--medium slds-button_outline-brand"
-                                  onclick="{!c.clickCreate}"/></p>
+                                  onclick="{!c.returnCard}"/></p>
         </center>
         </div>
 </aura:component>	

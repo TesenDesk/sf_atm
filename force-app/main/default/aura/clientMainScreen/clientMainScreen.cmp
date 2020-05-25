@@ -2,18 +2,15 @@
     
     <aura:attribute name="client" type="Bank_Card__c"/>
     <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
-    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
-
-    
     
     <aura:if isTrue="{!v.lconfig.currentPage__c  == 'Main'}">
-        <c:mainMenu lconfig="{!v.lconfig}"/>
+        <c:mainMenu lconfig="{!v.lconfig}" client="{!v.client}"/>
     </aura:if>
     <aura:if isTrue="{!v.lconfig.currentPage__c  == 'Balance'}">
-        <c:balanceScreen lconfig="{!v.lconfig}"/>
+        <c:balanceScreen lconfig="{!v.lconfig}" client="{!v.client}"/>
     </aura:if>
     <aura:if isTrue="{!v.lconfig.currentPage__c  == 'Withdraw'}">
-        <c:withdrawScreen lconfig="{!v.lconfig}"/>
+        <c:withdrawScreen lconfig="{!v.lconfig}" client="{!v.client}"/>
     </aura:if><!--
     <aura:if isTrue="{!v.isAOpen}">
         <c:balanceScreen isAOpen="{!v.isAOpen}"/>

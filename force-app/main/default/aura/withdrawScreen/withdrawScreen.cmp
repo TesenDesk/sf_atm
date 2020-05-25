@@ -1,29 +1,59 @@
 <aura:component>
+    <aura:attribute name="client" type="Bank_Card__c"/>
     <aura:attribute name="lconfig" type="Bank_LocalConfig__c"/>
-    
+    <aura:attribute name="curr" type="Map" default="{
+            min: 10,
+            max: 15000,
+            step: 10,
+            selected: 'RUB',
+            entered: 0,
+            sum: 0,
+            comm: 0,
+            total: 0,
+    }"/>
+    <aura:attribute name="options" type="List" default="[
+    {'label': 'RUB', 'value': 'RUB'},
+    {'label': 'USD', 'value': 'USD'},
+    {'label': 'BYN', 'value': 'BYN'}
+    ]"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
     <center>
-    <div class="slds-m-top_xx-large">
-        <div class="slds-text-heading_large">{!v.lconfig.language.label_currency}</div>
-        <lightning:button label="BYN"
-                class="slds-m-top--medium"
-                variant="brand"
-                iconName="utility:money"
-                onclick="{!c.bynSelected}"/>
-        <lightning:button label="USD"
-                class="slds-m-top--medium"
-                variant="brand"
-                iconName="utility:money"
-                onclick="{!c.usdSelected}"/>
-        <lightning:button label="RUB"
-                class="slds-m-top--medium"
-                variant="brand"
-                iconName="utility:money"
-                onclick="{!c.rubSelected}"/>
+        <fieldset class="slds-box slds-theme--default slds-container--small">
+                <form class="slds-form--stacked">
+                        {!v.lconfig.language.label_w_part1}{!v.curr.min}{!v.lconfig.language.label_w_part2}{!v.curr.max}{!' '+v.curr.selected}{!v.lconfig.language.label_w_part3}{!v.curr.step}{!' '+v.curr.selected}
+                        <lightning:radioGroup name="radioButtonGroup"
+                                label="{!v.lconfig.language.label_currency}"
+                                options="{! v.options }"
+                                value="{! v.curr.selected }"
+                                onclick="{! c.changeCurr }"
+                                type="button"/>
+                        <lightning:input aura:id="sum" 
+                                type="number"
+                                name="sum"
+                                label="{!v.lconfig.language.label_withdraw_amount}"
+                                value="{!v.curr.entered}"
+                                min="{!v.curr.min}"
+                                max="{!v.curr.max}"
+                                formatter="currency"
+                                required="true"
+                                onchange="{!c.changevalue}"
+                                step="{!v.curr.step}"/>
+                        В валюте счета: {!v.curr.sum}
+                        <p>Комиссия: {!v.curr.comm}</p>
+                        <p>Будет снято со счета: {!v.curr.total}</p>
+                        <lightning:button class="slds-m-top--medium slds-button_brand"
+                                label="OK"
+                                iconName="utility:check"
+                                title="OK"
+                                onclick="{! c.acceptWithdraw }"/>
+                </form>
+        </fieldset>
+    
+    
         <p><lightning:button class="slds-m-top--medium slds-button_outline-brand"
                 label="{!v.lconfig.language.label_cancel}"
                 iconName="utility:undo"
                 title="Close"
                 onclick="{! c.closeWithdraw }"/></p>
-    </div>
     </center>
 </aura:component>	

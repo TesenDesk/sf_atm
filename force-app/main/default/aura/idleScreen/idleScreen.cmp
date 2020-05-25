@@ -6,9 +6,12 @@
 
     <c:bankHeader lconfig="{!v.lconfig}" langRU="{!v.langRU}" langUS="{!v.langUS}"/>
     <aura:if isTrue="{!v.lconfig.card_inside__c}">
-       <c:enterPINScreen lconfig="{!v.lconfig}"/>
+        <c:enterPINScreen lconfig="{!v.lconfig}"/>
     <aura:set attribute="else">
     <div class="slds-m-around_xx-large">
+        <aura:if isTrue="{!v.lconfig.cardEmuEnabled__c}">
+            <div class="slds-text-heading_small">{!v.lconfig.language.label_emulator_warning}</div>
+        </aura:if>
         <center>
             <div class="slds-text-heading_large">Ilde screen</div>
             <div class="slds-text-heading_large"><b>NODATA</b></div>

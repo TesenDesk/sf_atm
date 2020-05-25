@@ -23,14 +23,15 @@ public with sharing class ATMController {
     }
 
     @AuraEnabled
-    public static Bank_Card__c getCard(Integer num) {
+    public static Bank_Card__c getCard(Long num) {
         
+        System.debug('CardNo: ' + num);
         // Check to make sure all fields are accessible to this user
         String[] fieldsToCheck = new String[] {
             'Balance__c', 'Card_Bank__c', 'Card_Owner_Name__c', 'cardCredit__c', 'CardNo__c', 'cardPIN__c', 'Currency__c'
         };
         
-        Map<String,Schema.SObjectField> fieldDescribeTokens = Schema.SObjectType.Bank_Config__c.fields.getMap();
+        Map<String,Schema.SObjectField> fieldDescribeTokens = Schema.SObjectType.Bank_Card__c.fields.getMap();
         
         for(String field : fieldsToCheck) {
             if( ! fieldDescribeTokens.get(field).getDescribe().isAccessible()) {
@@ -42,7 +43,10 @@ public with sharing class ATMController {
 
         cards = [SELECT Balance__c, Card_Bank__c, Card_Owner_Name__c, cardCredit__c, CardNo__c, cardPIN__c, Currency__c 
         FROM Bank_Card__c WHERE Bank_Card__c.CardNo__c = :num];
-        return cards[0];
+        /*if (cards.isEmpty())
+        	return null;
+        else*/
+           return cards[0];
     }
 
     /*
@@ -54,3 +58,4 @@ public with sharing class ATMController {
     }*/
 }
 // ATMController.getCard(1234567890123456);
+// SELECT Balance__c, Card_Bank__c, Card_Owner_Name__c, cardCredit__c, CardNo__c, cardPIN__c, Currency__c FROM Bank_Card__c WHERE Bank_Card__c.CardNo__c = "1234567890123456"
